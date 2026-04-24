@@ -82,14 +82,10 @@ npm run lint
 └── README.md
 ```
 
-## Screenshots
 
-_(Add screenshots of the desktop and mobile views here)_
 
-## Live Demo
 
-_(Add a link to your live demo here, e.g., Netlify, Vercel, or GitHub Pages)_
 
 ## Author
 
-- Frontend Mentor Profile: [@yourusername](https://www.frontendmentor.io/profile/yourusername)
+- Frontend Mentor Profile: [@batgev](https://www.github.com/batgev)
