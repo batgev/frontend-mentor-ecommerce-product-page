@@ -1,16 +1,95 @@
-# React + Vite
+# E-commerce Product Page
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive, interactive e-commerce product page built as a [Frontend Mentor](https://www.frontendmentor.io/) challenge. Users can browse product images in a gallery with a lightbox modal, adjust item quantities, add products to a cart, and view their cart contents.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Responsive Product Gallery** – Click through product images with thumbnail navigation.
+- **Lightbox Modal** – Desktop users can click the main image to open an expanded lightbox view with next/previous controls.
+- **Add to Cart** – Increment or decrement item quantity and add items to the shopping cart.
+- **Cart Dropdown** – View cart summary with item count, product details, and total price.
+- **Mobile Sidebar Navigation** – Hamburger menu for mobile users with a slide-out navigation panel.
+- **Fully Responsive Design** – Optimized layout for mobile, tablet, and desktop using Tailwind CSS.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React** – UI library
+- **Vite** – Build tool and development server
+- **Tailwind CSS** – Utility-first CSS framework
+- **Zustand** – Lightweight state management (with persistence and devtools)
+- **ESLint** – Code linting
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (version 18 or higher recommended)
+- npm (comes with Node.js)
+
+### Installation
+
+1. Clone the repository or download the project files.
+2. Navigate to the project directory.
+3. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+### Running the Development Server
+
+```bash
+npm run dev
+```
+
+Open the local URL shown in your terminal (usually `http://localhost:5173/`) to view the app.
+
+### Building for Production
+
+```bash
+npm run build
+```
+
+### Previewing the Production Build
+
+```bash
+npm run preview
+```
+
+### Linting
+
+```bash
+npm run lint
+```
+
+## Project Structure
+
+```
+├── public/
+│   └── images/           # Product images, icons, and logos
+├── src/
+│   ├── components/
+│   │   ├── Header.jsx    # Navigation, cart icon, mobile sidebar, cart dropdown
+│   │   └── Lightbox.jsx  # Desktop lightbox modal for product images
+│   ├── Store/
+│   │   └── store.js      # Zustand store for cart and sidebar state
+│   ├── App.jsx           # Main application component
+│   ├── main.jsx          # Application entry point
+│   └── index.css         # Global styles and Tailwind directives
+├── index.html
+├── package.json
+├── vite.config.js
+└── README.md
+```
+
+## Screenshots
+
+_(Add screenshots of the desktop and mobile views here)_
+
+## Live Demo
+
+_(Add a link to your live demo here, e.g., Netlify, Vercel, or GitHub Pages)_
+
+## Author
+
+- Frontend Mentor Profile: [@yourusername](https://www.frontendmentor.io/profile/yourusername)
