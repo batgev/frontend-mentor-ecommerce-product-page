@@ -1,47 +1,53 @@
-
 import Header from "./components/Header.jsx";
+import Lightbox from "./components/Lightbox.jsx";
 import useAuthStore from "./Store/store.js";
 import { useState } from "react";
 
 function App() {
-  const {toggleMobileSidebar,setItemsInCart} = useAuthStore()
+  const { toggleMobileSidebar, setItemsInCart } = useAuthStore();
   const images = [
     "/images/image-product-1.jpg",
     "/images/image-product-2.jpg",
     "/images/image-product-3.jpg",
     "/images/image-product-4.jpg",
   ];
-  const [imageIndex,setImageIndex] = useState(0)
-  const [count,setCount] = useState(0);
-  
+  const thumbnailImages = [
+    "/images/image-product-1-thumbnail.jpg",
+    "/images/image-product-2-thumbnail.jpg",
+    "/images/image-product-3-thumbnail.jpg",
+    "/images/image-product-4-thumbnail.jpg",
+  ];
+  const [imageIndex, setImageIndex] = useState(0);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [count, setCount] = useState(0);
 
-  const handleNextPicture = ()=>{
-    if(imageIndex < images.length-1){
-      setImageIndex(prev=> prev + 1);
-      return
+  const handleNextPicture = () => {
+    if (imageIndex < images.length - 1) {
+      setImageIndex((prev) => prev + 1);
+      return;
     }
-  }
-   const handlePrevPicture = () => {
-     if (imageIndex > 0) {
-       setImageIndex((prev) => prev -1);
-       return;
-     }
-   };
-  const handleIncrement = ()=>{
-    setCount(prev=> prev + 1)
-  }
-  const handleDecreament = ()=>{
-   if(count > 0){
-     setCount((prev) => prev - 1);
-    return
-   }
-  }
+  };
+  const handlePrevPicture = () => {
+    if (imageIndex > 0) {
+      setImageIndex((prev) => prev - 1);
+      return;
+    }
+  };
+  const handleIncrement = () => {
+    setCount((prev) => prev + 1);
+  };
+  const handleDecreament = () => {
+    if (count > 0) {
+      setCount((prev) => prev - 1);
+      return;
+    }
+  };
 
-  const handleAddToCart = ()=>{
-    if(count <= 0) return alert('Add a least one item');
+  const handleAddToCart = () => {
+    if (count <= 0) return alert("Add a least one item");
     setItemsInCart(count);
-    setCount(0)
-  }
+    setCount(0);
+  };
 
   return (
     <div className="flex  md:relative flex-col md:pt-6 md:items-center gap-4 h-screen  w-full  bg-white">
@@ -54,11 +60,28 @@ function App() {
             <img
               src={images[imageIndex]}
               alt=""
-              className="w-full  md:w-87.5 h-87.5 md:rounded-md"
+              onClick={() => setIsLightboxOpen(true)}
+              className="w-full md:w-87.5 h-87.5 md:rounded-md md:cursor-pointer"
             />
             <div className="hidden md:flex md:justify-between">
-              {images.map((image) => (
-                <img src={image} key={image} className="w-16 h-16 rounded-md" />
+              {thumbnailImages.map((thumb, index) => (
+                <div
+                  key={thumb}
+                  onClick={() => setImageIndex(index)}
+                  className={`relative w-16 h-16 rounded-xl cursor-pointer overflow-hidden transition-all ${
+                    index === imageIndex
+                      ? "ring-2 ring-[hsl(26_100%_55%)]"
+                      : "hover:opacity-75"
+                  }`}
+                >
+                  <img
+                    src={thumb}
+                    alt=""
+                    className={`w-full h-full object-cover rounded-xl ${
+                      index === imageIndex ? "opacity-50" : ""
+                    }`}
+                  />
+                </div>
               ))}
             </div>
           </div>
@@ -68,7 +91,7 @@ function App() {
                 src="/images/icon-previous.svg"
                 alt=""
                 onClick={handlePrevPicture}
-                className={`${toggleMobileSidebar ? 'hidden':'flex'}`}
+                className={`${toggleMobileSidebar ? "hidden" : "flex"}`}
               />
             </div>
             <div className="flex justify-center items-center bg-white px-4 py-4 rounded-full">
@@ -120,13 +143,27 @@ function App() {
                 onClick={handleIncrement}
               />
             </div>
-            <div className="flex items-center  justify-center cursor-pointer px-12 rounded-md md:py-1.5 py-2 gap-4 bg-[hsl(26_100%_55%)]" onClick={handleAddToCart}>
+            <div
+              className="flex items-center  justify-center cursor-pointer px-12 rounded-md md:py-1.5 py-2 gap-4 bg-[hsl(26_100%_55%)]"
+              onClick={handleAddToCart}
+            >
               <img src="/images/icon-cart.svg" alt="" className="h-4 " />
-              <button className="outline-none cursor-pointer">Add to cart</button>
+              <button className="outline-none cursor-pointer">
+                Add to cart
+              </button>
             </div>
           </div>
         </div>
       </div>
+
+      <Lightbox
+        images={images}
+        thumbnailImages={thumbnailImages}
+        imageIndex={imageIndex}
+        setImageIndex={setImageIndex}
+        isOpen={isLightboxOpen}
+        onClose={() => setIsLightboxOpen(false)}
+      />
     </div>
   );
 }
